@@ -18,7 +18,18 @@ type Alaki struct {
 
 func main() {
 	log.Println("started...")
+
+
+	
 	printer.Clear()
+
+	printer.Demo()
+	fmt.Println()
+	fmt.Println()
+	fmt.Println()
+	fmt.Println()
+	fmt.Println()
+
 	printer.Disonnected()
 	printer.Connecting("TCP", "192.168.10.31", "8080")
 	printer.Connected("TCP", "192.168.10.31", "8080")
