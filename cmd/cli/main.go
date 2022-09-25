@@ -1,10 +1,11 @@
 package main
 
 import (
+	// "fmt"
 	"fmt"
 	"log"
 
-	"github.com/gilmardcom/gorepl/util/printer"
+	"github.com/gilmardcom/gorepl"
 )
 
 type Alaki struct {
@@ -17,30 +18,42 @@ type Alaki struct {
 }
 
 func main() {
+
+	gorepl.Clear()
+
 	log.Println("started...")
 
-
-	
-	printer.Clear()
-
-	printer.Demo()
+	gorepl.Prompt("Promot ")
+	fmt.Println(" what ever comes after prompt")
+	gorepl.Connecting("TCP", "192.168.10.31", "8080")
+	gorepl.Connected("TCP", "192.168.10.31", "8080")
+	gorepl.Disonnected()
+	gorepl.Path("/this/is/the/path/to/the/data")
 	fmt.Println()
+	gorepl.Path("/this/is/the/path/to/some/more/data")
 	fmt.Println()
-	fmt.Println()
-	fmt.Println()
-	fmt.Println()
-
-	printer.Disonnected()
-	printer.Connecting("TCP", "192.168.10.31", "8080")
-	printer.Connected("TCP", "192.168.10.31", "8080")
-	printer.Path("/this/is/the/path/to/the/data")
-	printer.Prompt("|   prompt $ ")
-	fmt.Print("|     text     |")
-	fmt.Println("|     text     |")
-	fmt.Println("|     text     |")
 	alaki := Alaki{"Hani", true, false, 12345, 88.234, "something"}
 	fmt.Println(alaki)
-	printer.Json(alaki)
+	gorepl.Json(alaki)
+
+	// printer.Demo()
+	// fmt.Println()
+	// fmt.Println()
+	// fmt.Println()
+	// fmt.Println()
+	// fmt.Println()
+
+	// printer.Disonnected()
+	// printer.Connecting("TCP", "192.168.10.31", "8080")
+	// printer.Connected("TCP", "192.168.10.31", "8080")
+	// printer.Path("/this/is/the/path/to/the/data")
+	// printer.Prompt("|   prompt $ ")
+	// fmt.Print("|     text     |")
+	// fmt.Println("|     text     |")
+	// fmt.Println("|     text     |")
+	// alaki := Alaki{"Hani", true, false, 12345, 88.234, "something"}
+	// fmt.Println(alaki)
+	// printer.Json(alaki)
 
 	// // Print with default helper functions
 	// color.Cyan("Prints text in cyan.")
