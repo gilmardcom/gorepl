@@ -24,14 +24,26 @@ func Clear() error {
 	return command.Run()
 }
 
-// Prompt
-
-func Prompt(data string) {
-	Config.ColorPrompt.Print(data + Config.PromptSign)
+func Error(err string) {
+	Config.ColorError.Print("Error: " + err)
 }
 
-func Promptln(data string) {
-	Config.ColorPrompt.Println(data + Config.PromptSign)
+func Errorln(err string) {
+	Config.ColorError.Println("Error: " + err)
+}
+
+// Prompt
+
+func Prompt() {
+	if Config.EmptyLineBeforePrompt {
+		fmt.Println()
+	}
+	Config.ColorPrompt.Print(Config.PromptValue + Config.PromptSign)
+	if Config.PromotSeparateLine {
+		fmt.Println()
+	} else {
+		fmt.Print(" ")
+	}
 }
 
 // Connection status

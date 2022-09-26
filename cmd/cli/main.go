@@ -2,6 +2,7 @@ package main
 
 import (
 	// "fmt"
+	"errors"
 	"fmt"
 	"log"
 
@@ -23,8 +24,9 @@ func main() {
 
 	log.Println("started...")
 
-	gorepl.Prompt("Promot ")
-	fmt.Println(" what ever comes after prompt")
+	gorepl.Config.PromotSeparateLine = false
+	gorepl.Prompt()
+	fmt.Println("what ever comes after prompt")
 	gorepl.Connection()
 	gorepl.Config.ConStatus = gorepl.CsConnecting
 	gorepl.Connection()
@@ -41,6 +43,16 @@ func main() {
 	alaki := Alaki{"Hani", true, false, 12345, 88.234, "something"}
 	fmt.Println(alaki)
 	gorepl.Json(alaki)
+
+	gorepl.AddCommand("help", func(args []string) (string, error) {
+		fmt.Println("this is the help for this repl: empty for now!")
+		if len(args) > 0 {
+			return "", errors.New("No args expected!")
+		}
+		return "", nil
+	})
+
+	gorepl.GoRepl()
 
 	log.Println("... finished.")
 }
