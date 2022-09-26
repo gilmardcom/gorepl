@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"strconv"
 	"strings"
 
 	json "github.com/nwidger/jsoncolor"
@@ -34,18 +35,19 @@ func Promptln(data string) {
 }
 
 // Connection status
-func Connecting(protocol string, host string, port string) {
-	Config.ColorConnecting.Print(" Connecting... ")
-	fmt.Println(" " + host + " @ " + port + " (" + protocol + ") ")
-}
-
-func Connected(protocol string, host string, port string) {
-	Config.ColorConnected.Print(" Connected ")
-	fmt.Println(" " + host + " @ " + port + " (" + protocol + ") ")
-}
-
-func Disonnected() {
-	Config.ColorDisconnected.Println(" Disconnected ")
+func Connection() {
+	switch Config.ConStatus {
+	case CsConnecting:
+		Config.ColorConnecting.Print(" Connecting... ")
+		fmt.Println(" " + Config.ConHost + " @ " + strconv.Itoa(Config.ConPort) + " (" + Config.ConProtocol + ") ")
+	case CsConnected:
+		Config.ColorConnected.Print(" Connected ")
+		fmt.Println(" " + Config.ConHost + " @ " + strconv.Itoa(Config.ConPort) + " (" + Config.ConProtocol + ") ")
+	case CsDisonnected:
+		Config.ColorDisconnected.Println(" Disconnected ")
+	case CsNoConnection:
+		// print nothing
+	}
 }
 
 // Path
