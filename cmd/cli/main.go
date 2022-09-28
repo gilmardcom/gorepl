@@ -1,15 +1,14 @@
 package main
 
 import (
-	// "fmt"
 	"errors"
 	"fmt"
-	"log"
+	"strconv"
 
 	"github.com/gilmardcom/gorepl"
 )
 
-type Alaki struct {
+type SampleJson struct {
 	Name     string  `json:"Name"`
 	BoolT    bool    `json:"BoolT"`
 	BoolF    bool    `json:"BoolF"`
@@ -18,41 +17,64 @@ type Alaki struct {
 	Nulldata string  `json:"Null"`
 }
 
+var value = 0
+var sampleJson = SampleJson{"Hani", true, false, 12345, 88.234, "something"}
+
 func main() {
 
-	gorepl.Clear()
-
-	log.Println("started...")
-
-	gorepl.Config.PromotSeparateLine = false
-	gorepl.Prompt()
-	fmt.Println("what ever comes after prompt")
-	gorepl.Connection()
-	gorepl.Config.ConStatus = gorepl.CsConnecting
-	gorepl.Connection()
-	gorepl.Config.ConStatus = gorepl.CsConnected
-	gorepl.Connection()
 	gorepl.Config.ConStatus = gorepl.CsDisonnected
-	gorepl.Connection()
-	gorepl.Config.ConStatus = gorepl.CsNoConnection
-	gorepl.Connection()
-	gorepl.Path("/this/is/the/path/to/the/data")
-	fmt.Println()
-	gorepl.Path("/this/is/the/path/to/some/more/data")
-	fmt.Println()
-	alaki := Alaki{"Hani", true, false, 12345, 88.234, "something"}
-	fmt.Println(alaki)
-	gorepl.Json(alaki)
 
-	gorepl.AddCommand("help", func(args []string) (string, error) {
-		fmt.Println("this is the help for this repl: empty for now!")
-		if len(args) > 0 {
-			return "", errors.New("No args expected!")
+	gorepl.AddCommand("quit", "q", "quits the repl", func(args []string) (string, error) {
+		gorepl.StopRepl()
+		return "", nil
+	})
+
+	gorepl.AddCommand("clear", "c", "clears the screen", func(args []string) (string, error) {
+		gorepl.Clear()
+		return "", nil
+	})
+
+	gorepl.AddCommand("help", "h", "shows default help", func(args []string) (string, error) {
+		gorepl.DefaultHelp()
+		return "", nil
+	})
+
+	gorepl.AddCommand("print", "p", "prints the current value", func(args []string) (string, error) {
+		fmt.Println("Current value:", value)
+		return "", nil
+	})
+
+	gorepl.AddCommand("reset", "r", "resets the current value", func(args []string) (string, error) {
+		value = 0
+		return "", nil
+	})
+
+	gorepl.AddCommand("add", "a", "adds the given value to the current value, e.g. add 10", func(args []string) (string, error) {
+		if len(args) < 1 {
+			return "At least one arg needed", errors.New("invalid number of args")
+		}
+		for _, item := range args {
+			givenValue, _ := strconv.Atoi(item)
+			value += givenValue
 		}
 		return "", nil
 	})
 
-	gorepl.GoRepl()
+	gorepl.AddCommand("sub", "s", "substracts the given value from the current value, e.g. sub 10", func(args []string) (string, error) {
+		if len(args) < 1 {
+			return "At least one arg needed", errors.New("invalid number of args")
+		}
+		for _, item := range args {
+			givenValue, _ := strconv.Atoi(item)
+			value -= givenValue
+		}
+		return "", nil
+	})
 
-	log.Println("... finished.")
+	gorepl.AddCommand("json", "j", "prints a sample json", func(args []string) (string, error) {
+		gorepl.Json(sampleJson)
+		return "", nil
+	})
+
+	gorepl.GoRepl()
 }
