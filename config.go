@@ -26,6 +26,7 @@ type AppConfig struct {
 	ConHost               string
 	ConPort               int
 	ColorError            *fcolor.Color
+	ColorHelp             *fcolor.Color
 	ColorPrompt           *fcolor.Color
 	ColorConnecting       *fcolor.Color
 	ColorConnected        *fcolor.Color
@@ -53,6 +54,7 @@ var Config = AppConfig{
 	ConHost:               "/localhost",
 	ConPort:               8888,
 	ColorError:            fcolor.New(fcolor.FgRed),
+	ColorHelp:             fcolor.New(fcolor.FgHiWhite),
 	ColorPrompt:           fcolor.New(fcolor.FgHiCyan, fcolor.BgBlue),
 	ColorConnecting:       fcolor.New(fcolor.FgBlack, fcolor.BgYellow),
 	ColorConnected:        fcolor.New(fcolor.FgBlack, fcolor.BgGreen),
