@@ -41,5 +41,8 @@ gorepl.Config.ConStatus = gorepl.CsDisonnected
 GoRepl()
 ```
 
+## License
+
+The MIT License (MIT) - see [`LICENSE.md`](https://github.com/gilmardcom/gorepl/LICENSE.md) for more details.
 
 
