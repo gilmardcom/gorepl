@@ -43,6 +43,6 @@ GoRepl()
 
 ## License
 
-The MIT License (MIT) - see [`LICENSE.md`](https://github.com/gilmardcom/gorepl/LICENSE.md) for more details.
+The MIT License (MIT) - see [`LICENSE.md`](https://github.com/gilmardcom/gorepl/blob/main/LICENSE) for more details.
 
 
