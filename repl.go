@@ -87,7 +87,6 @@ func hanldeInvalidCommand(cmd string, args []string) {
 
 func cleanInput(userInput string) string {
 	output := strings.TrimSpace(userInput)
-	output = strings.ToLower(output)
 	return output
 }
 
